@@ -29,9 +29,6 @@ public class Generics {
 
         gen.printLowerBoundedWildCard(first);
         gen.printLowerBoundedWildCard(second);
-        /* Tiger ниже по иеррахии, чем Predator, поэтому
-        срабатывает огрничение снизу
-        gen.printLowerBoundedWildCard(third); */
     }
 
     public void printObject(List<?> list) {
