@@ -5,9 +5,10 @@ import java.util.*;
 public class SimpleArrayList<T> implements SimpleList<T> {
 
     private T[] container;
-    private int size;
-    private int modCount;
 
+    private int size;
+
+    private int modCount;
 
     public SimpleArrayList(int capacity) {
         container = (T[]) new Object[capacity];
@@ -56,7 +57,6 @@ public class SimpleArrayList<T> implements SimpleList<T> {
         return size;
     }
 
-
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
@@ -82,8 +82,8 @@ public class SimpleArrayList<T> implements SimpleList<T> {
     }
 
     private T[] extend() {
-        return container = size == 0 ? Arrays.copyOf(container, container.length + 1) :
-                Arrays.copyOf(container, container.length * 2);
+        return container = size == 0 ? Arrays.copyOf(container, container.length + 1)
+                : Arrays.copyOf(container, container.length * 2);
     }
 
 }
