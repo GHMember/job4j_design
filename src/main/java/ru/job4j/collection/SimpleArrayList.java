@@ -1,6 +1,10 @@
 package ru.job4j.collection;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.ConcurrentModificationException;
 
 public class SimpleArrayList<T> implements SimpleList<T> {
 
@@ -84,5 +88,4 @@ public class SimpleArrayList<T> implements SimpleList<T> {
                 : Arrays.copyOf(container, container.length * 2);
         return container;
     }
-
 }
