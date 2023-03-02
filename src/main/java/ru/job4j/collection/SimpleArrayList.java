@@ -50,7 +50,6 @@ public class SimpleArrayList<T> implements SimpleList<T> {
     @Override
     public T get(int index) {
         Objects.checkIndex(index, size);
-        modCount++;
         return container[index];
     }
 
