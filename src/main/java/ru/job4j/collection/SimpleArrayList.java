@@ -28,16 +28,14 @@ public class SimpleArrayList<T> implements SimpleList<T> {
 
     @Override
     public T set(int index, T newValue) {
-        Objects.checkIndex(index, size);
-        T oldValue = container[index];
+        T oldValue = get(index);
         container[index] = newValue;
         return oldValue;
     }
 
     @Override
     public T remove(int index) {
-        Objects.checkIndex(index, size);
-        T removedValue = container[index];
+        T removedValue = get(index);
         System.arraycopy(container, index + 1, container, index, container.length - index - 1);
         if (container.length - 1 == size) {
             container[container.length - 1] = null;
@@ -60,7 +58,7 @@ public class SimpleArrayList<T> implements SimpleList<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new Iterator<T>() {
+        return new Iterator<>() {
             private final int expectedModCount = modCount;
             private int index;
 
