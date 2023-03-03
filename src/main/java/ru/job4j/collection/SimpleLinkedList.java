@@ -10,7 +10,6 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
     private int size;
     private int modCount;
     private Node<E> head;
-    private Node<E> tail;
 
     private static class Node<E> {
         private final E item;
@@ -27,10 +26,12 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
         Node<E> newNode = new Node<>(value, null);
         if (head == null) {
             head = newNode;
-            tail = head;
         } else {
+            Node<E> tail = head;
+            while (tail.next != null) {
+                tail = tail.next;
+            }
             tail.next = newNode;
-            tail = tail.next;
         }
         size++;
         modCount++;
@@ -40,9 +41,8 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
     public E get(int index) {
         Objects.checkIndex(index, size);
         Node<E> node = head;
-        while (index > 0) {
+        for (int i = index; i > 0; i--) {
             node = node.next;
-            index--;
         }
         return node.item;
     }
