@@ -7,8 +7,7 @@ public class ListUtils {
 
     public static <T> void addBefore(List<T> list, int index, T value) {
         Objects.checkIndex(index, list.size());
-        ListIterator<T> iterator = list.listIterator(index);
-        iterator.add(value);
+        list.add(index, value);
     }
 
     public static <T> void addAfter(List<T> list, int index, T value) {
@@ -35,8 +34,7 @@ public class ListUtils {
 
     public static <T> void removeAll(List<T> list, List<T> elements) {
         for (T el : elements) {
-            Predicate<T> filter = s -> s == el;
-            removeIf(list, filter);
+            removeIf(list, s -> s.equals(el));
         }
     }
 }
