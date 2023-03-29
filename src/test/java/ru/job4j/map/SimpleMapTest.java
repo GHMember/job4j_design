@@ -94,8 +94,12 @@ class SimpleMapTest {
         map.put(null, "0000");
         assertThat(map.put(15, "15")).isTrue();
         assertThat(map).hasSize(6);
+        assertThat(map.put(8, "8")).isTrue();
+        assertThat(map.put(16, "16")).isFalse();
         assertThat(map.get(4)).isEqualTo("4");
+        assertThat(map.get(8)).isEqualTo("8");
         assertThat(map.get(15)).isEqualTo("15");
+        assertThat(map).hasSize(7).contains(null, 1, 2, 3, 4, 8, 15);
     }
 
     @Test

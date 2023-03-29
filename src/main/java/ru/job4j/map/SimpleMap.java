@@ -18,7 +18,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
         if ((double) count / capacity >= LOAD_FACTOR) {
             expand();
         }
-        int index = key == null ? 0 : indexFor(hash(key.hashCode()));
+        int index = getIndex(key);
         boolean rsl = table[index] == null;
         if (rsl) {
             table[index] = new MapEntry<>(key, value);
@@ -36,23 +36,29 @@ public class SimpleMap<K, V> implements Map<K, V> {
         return hash & (table.length - 1);
     }
 
+    private int getIndex(K key) {
+        return key == null ? 0 : indexFor(hash(key.hashCode()));
+    }
+
     private void expand() {
         MapEntry<K, V>[] oldTable = table;
         capacity <<= 1;
         table = new MapEntry[capacity];
         for (MapEntry<K, V> pair : oldTable) {
-            int i = indexFor(hash(pair.key.hashCode()));
-            table[i] = new MapEntry<>(pair.key, pair.value);
+            if (pair != null) {
+                int index = getIndex(pair.key);
+                table[index] = new MapEntry<>(pair.key, pair.value);
+            }
         }
     }
 
     @Override
     public V get(K key) {
-        int index = key == null ? 0 : indexFor(hash(key.hashCode()));
+        int index = getIndex(key);
         V rsl = null;
-        if ((table[index] != null && key == table[index].key)
-                || (key != null && table[index] != null && table[index].key != null
-                && key.hashCode() == table[index].key.hashCode())) {
+        if ((key != null && table[index] != null && table[index].key != null
+                && key.hashCode() == table[index].key.hashCode())
+                || (table[index] != null && table[index].key == key)) {
             rsl = table[index].value;
         }
         return rsl;
@@ -60,7 +66,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
 
     @Override
     public boolean remove(K key) {
-        int index = key == null ? 0 : indexFor(hash(key.hashCode()));
+        int index = getIndex(key);
         boolean rsl = get(key) != null;
         if (rsl)  {
             table[index] = null;
