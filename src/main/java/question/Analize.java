@@ -23,18 +23,15 @@ public class Analize {
                 added++;
                 result.setAdded(added++);
             }
+            if (prev.containsKey(pair.getKey()) && !(pair.getValue().equals(prev.get(pair.getKey())))) {
+                changed++;
+                result.setChanged(changed);
+            }
         }
-        for (Map.Entry<Integer, String> pair1 : prev.entrySet()) {
-            if (!curr.containsKey(pair1.getKey())) {
+        for (Map.Entry<Integer, String> pair : prev.entrySet()) {
+            if (!curr.containsKey(pair.getKey())) {
                 deleted++;
                 result.setDeleted(deleted);
-            }
-            for (Map.Entry<Integer, String> pair2 : curr.entrySet()) {
-                if (pair1.getKey().equals(pair2.getKey())
-                        && !(pair1.getValue().equals(pair2.getValue()))) {
-                    changed++;
-                    result.setChanged(changed);
-                }
             }
         }
         return result;
