@@ -1,9 +1,6 @@
-package question;
+package ru.job4j.question;
 
 import org.junit.jupiter.api.Test;
-import ru.job4j.question.Analize;
-import ru.job4j.question.Info;
-import ru.job4j.question.User;
 
 import java.util.Set;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
