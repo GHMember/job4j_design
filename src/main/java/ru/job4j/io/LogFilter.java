@@ -8,7 +8,12 @@ public class LogFilter {
     public List<String> filter(String file) {
         List<String> result = new ArrayList<>();
         try (BufferedReader in = new BufferedReader(new FileReader(file))) {
-            in.lines().filter(s -> s.contains("404 ")).forEach(result::add);
+            for (String line = in.readLine(); line != null; line = in.readLine()) {
+                String[] temp = line.split(" ");
+                if (temp[temp.length - 2].equals("404")) {
+                    result.add(line);
+                }
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -21,6 +26,5 @@ public class LogFilter {
         for (String str : log) {
             System.out.println(str);
         }
-
     }
 }
