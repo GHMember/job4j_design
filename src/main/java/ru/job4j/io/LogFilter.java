@@ -20,11 +20,19 @@ public class LogFilter {
         return result;
     }
 
+    public static void save(List<String> log, String file) {
+        try  (PrintWriter out = new PrintWriter(new BufferedOutputStream(new FileOutputStream(file)))) {
+            for (String str : log) {
+                out.printf("%s%n", str);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
         LogFilter logFilter = new LogFilter();
         List<String> log = logFilter.filter("data/log.txt");
-        for (String str : log) {
-            System.out.println(str);
-        }
+        save(log, "data/404.txt");
     }
 }
