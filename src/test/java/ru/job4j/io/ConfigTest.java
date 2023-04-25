@@ -1,6 +1,5 @@
 package ru.job4j.io;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 
@@ -40,20 +39,26 @@ class ConfigTest {
     void whenPairStartWithEqualSign() {
         String path = "data/start_with_=.txt";
         Config config = new Config(path);
-        Assertions.assertThrows(IllegalArgumentException.class, config::load);
+        assertThatThrownBy(config::load)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("=org.postgresql.Driver");
     }
 
     @Test
     void whenPairEndWithEqualSign() {
         String path = "data/end_with_=.txt";
         Config config = new Config(path);
-        Assertions.assertThrows(IllegalArgumentException.class, config::load);
+        assertThatThrownBy(config::load)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("org.postgresql.Driver=");
     }
 
     @Test
     void whenPairHasOnlyEqualSign() {
         String path = "data/only_=.txt";
         Config config = new Config(path);
-        Assertions.assertThrows(IllegalArgumentException.class, config::load);
+        assertThatThrownBy(config::load)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(" =");
     }
 }

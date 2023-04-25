@@ -20,9 +20,9 @@ public class Config {
         try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
             String s;
             while ((s = read.readLine()) != null) {
-                if (s.length() != 0 && !s.startsWith("#")) {
+                if (!s.isBlank() && !s.startsWith("#")) {
                     if (!s.matches("\\S+=\\S+")) {
-                        throw new IllegalArgumentException();
+                        throw new IllegalArgumentException(s);
                     }
                     String[] temp = s.split("=", 2);
                     values.put(temp[0], temp[1]);
