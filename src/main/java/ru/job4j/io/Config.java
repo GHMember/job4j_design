@@ -22,7 +22,7 @@ public class Config {
             while ((s = read.readLine()) != null) {
                 if (!s.isBlank() && !s.startsWith("#")) {
                     if (!s.matches("\\S+=\\S+")) {
-                        throw new IllegalArgumentException(s);
+                        throw new IllegalArgumentException(String.format("\"%s\" does not match the pattern", s));
                     }
                     String[] temp = s.split("=", 2);
                     values.put(temp[0], temp[1]);

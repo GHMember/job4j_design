@@ -41,7 +41,7 @@ class ConfigTest {
         Config config = new Config(path);
         assertThatThrownBy(config::load)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("=org.postgresql.Driver");
+                .hasMessageContaining("\"=org.postgresql.Driver\" does not match the pattern");
     }
 
     @Test
@@ -50,7 +50,7 @@ class ConfigTest {
         Config config = new Config(path);
         assertThatThrownBy(config::load)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("org.postgresql.Driver=");
+                .hasMessageContaining("\"org.postgresql.Driver=\" does not match the pattern");
     }
 
     @Test
@@ -59,6 +59,6 @@ class ConfigTest {
         Config config = new Config(path);
         assertThatThrownBy(config::load)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(" =");
+                .hasMessageContaining("\" =\" does not match the pattern");
     }
 }
