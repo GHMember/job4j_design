@@ -5,12 +5,19 @@ import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Predicate;
 
 public class Search {
     public static void main(String[] args) throws IOException {
-        if (args.length < 2) {
-            throw new IllegalArgumentException("Root folder and / or file format is null");
+        if (args.length != 2) {
+            throw new IllegalArgumentException("Wrong number of arguments. Expected 2.");
+        }
+        if (!Objects.equals(args[0], ".")) {
+            throw new IllegalArgumentException("Root folder is null. Usage  ROOT_FOLDER.");
+        }
+        if (!Objects.equals(args[1], ".js")) {
+            throw new IllegalArgumentException("File format must be \".js\"");
         }
         Path start = Paths.get(args[0]);
         search(start, p -> p.toFile().getName().endsWith(args[1])).forEach(System.out::println);
