@@ -10,10 +10,12 @@ import java.util.*;
 public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
     private final Map<FileProperty, Path> map;
     private final Set<Path> set;
+    List<String> result;
 
     DuplicatesVisitor() {
         this.map = new HashMap<>();
         this.set = new HashSet<>();
+        this.result = new ArrayList<>();
     }
 
     @Override
@@ -24,13 +26,20 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
             if (map.put(fp, file.toAbsolutePath()) != null) {
                 set.add(map.get(fp));
                 if (set.add(path)) {
-                    System.out.format("%s - %d%n", fp.getName(), fp.getSize());
-                    System.out.println(path);
+
+                    result.add(fp.getName() + " - " + fp.getSize() + "%n");
+                    result.add(path.toString());
                 }
-                System.out.println(map.get(fp));
+                result.add(map.get(fp).toString());
             }
         }
         return super.visitFile(file, attrs);
+    }
+
+    public void getMessage() {
+        for (String str : result) {
+            System.out.println(str);
+        }
     }
 }
 
