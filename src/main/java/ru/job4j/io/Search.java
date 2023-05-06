@@ -19,7 +19,7 @@ public class Search {
         if (args.length != 2) {
             throw new IllegalArgumentException("Wrong number of arguments. Expected 2.");
         }
-        File file = new File("c:\\");
+        File file = new File(args[0]);
         if (!file.exists()) {
             throw new IllegalArgumentException(String.format("Not exist %s", file.getAbsoluteFile()));
         }
