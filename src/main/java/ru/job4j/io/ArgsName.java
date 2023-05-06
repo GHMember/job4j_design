@@ -16,6 +16,7 @@ public class ArgsName {
 
     private void parse(String[] args) {
         for (String s : args) {
+            validation(s);
             String[] temp = s.split("=", 2);
             values.put(temp[0].substring(1), temp[1]);
         }
@@ -25,27 +26,29 @@ public class ArgsName {
         if (args.length == 0) {
             throw new IllegalArgumentException("Arguments not passed to program");
         }
-        for (String s : args) {
-            if (s.startsWith("-=")) {
-                throw new IllegalArgumentException(
-                        String.format("Error: This argument '%s' does not contain a key", s));
-            }
-            if (!s.startsWith("-")) {
-                throw new IllegalArgumentException(
-                        String.format("Error: This argument '%s' does not start with a '-' character", s));
-            }
-            if (s.indexOf("=") == s.length() - 1) {
-                throw new IllegalArgumentException(
-                        String.format("Error: This argument '%s' does not contain a value", s));
-            }
-            if (!s.contains("=")) {
-                throw new IllegalArgumentException(
-                        String.format("Error: This argument '%s' does not contain an equal sign", s));
-            }
-        }
         ArgsName names = new ArgsName();
         names.parse(args);
         return names;
+    }
+
+    private void validation(String str) {
+        if (str.startsWith("-=")) {
+            throw new IllegalArgumentException(
+                    String.format("Error: This argument '%s' does not contain a key", str));
+        }
+        if (!str.startsWith("-")) {
+            throw new IllegalArgumentException(
+                    String.format("Error: This argument '%s' does not start with a '-' character", str));
+        }
+        if (str.indexOf("=") == str.length() - 1) {
+            throw new IllegalArgumentException(
+                    String.format("Error: This argument '%s' does not contain a value", str));
+        }
+        if (!str.contains("=")) {
+            throw new IllegalArgumentException(
+                    String.format("Error: This argument '%s' does not contain an equal sign", str));
+        }
+
     }
 
     public static void main(String[] args) {
