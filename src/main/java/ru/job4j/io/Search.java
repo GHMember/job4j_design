@@ -12,7 +12,7 @@ public class Search {
     public static void main(String[] args) throws IOException {
         validation(args);
         Path start = Paths.get(".");
-        search(start, p -> p.toFile().getName().endsWith(".js")).forEach(System.out::println);
+        search(start, p -> p.toFile().getName().endsWith(".js")).forEach(p -> System.out.println(p.toFile().getName()));
     }
 
     private static void validation(String[] args) {
@@ -49,7 +49,7 @@ public class Search {
         @Override
         public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
             if (condition.test(file)) {
-                paths.add(file.getFileName());
+                paths.add(file);
             }
             return FileVisitResult.CONTINUE;
         }
