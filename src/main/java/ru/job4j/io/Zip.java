@@ -37,7 +37,8 @@ public class Zip {
         if (args.length != 3) {
             throw new IllegalArgumentException("Wrong number of arguments. Expected 3.");
         }
-        File file = new File(getArgsValue(args, "d"));
+        ArgsName argsValue = ArgsName.of(args);
+        File file = new File(argsValue.get("d"));
         if (!file.exists()) {
             throw new IllegalArgumentException(String.format("Not exist %s", file.getAbsoluteFile()));
         }
@@ -52,11 +53,6 @@ public class Zip {
         }
     }
 
-    private static String getArgsValue(String[] args, String key) {
-        ArgsName argsValue = ArgsName.of(args);
-        return argsValue.get(key);
-    }
-
     public static void main(String[] args) throws IOException {
         validation(args);
         Zip zip = new Zip();
@@ -64,9 +60,10 @@ public class Zip {
                 new File("./pom.xml"),
                 new File("./pom.zip")
         );
-        Path root = Paths.get(getArgsValue(args, "d"));
+        ArgsName argsValue = ArgsName.of(args);
+        Path root = Paths.get(argsValue.get("d"));
         List<Path> sources = new ArrayList<>(Search.search(root, p -> !p.toFile().getName().
-                endsWith(getArgsValue(args, "e"))));
-        zip.packFiles(sources, new File(getArgsValue(args, "o")));
+                endsWith(argsValue.get("e"))));
+        zip.packFiles(sources, new File(argsValue.get("o")));
     }
 }
