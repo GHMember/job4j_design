@@ -9,11 +9,11 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 public class Zip {
-    public void packFiles(List<File> sources, File target) {
+    public void packFiles(List<Path> sources, File target) {
        try (ZipOutputStream zip = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(target)))) {
-           for (File source : sources) {
-               zip.putNextEntry(new ZipEntry(source.getPath()));
-               try (BufferedInputStream out = new BufferedInputStream(new FileInputStream(source))) {
+           for (Path source : sources) {
+               zip.putNextEntry(new ZipEntry(source.toString()));
+               try (BufferedInputStream out = new BufferedInputStream(new FileInputStream(source.toString()))) {
                    zip.write(out.readAllBytes());
                }
            }
@@ -44,6 +44,12 @@ public class Zip {
         if (!file.isDirectory()) {
             throw new IllegalArgumentException(String.format("Not directory %s", file.getAbsoluteFile()));
         }
+        if (!args[1].matches(".\\S+")) {
+            throw new IllegalArgumentException("Wrong file format");
+        }
+        if (!args[2].matches("\\S+.zip")) {
+            throw new IllegalArgumentException("Wrong archive format");
+        }
     }
 
     private static String getArgsValue(String[] args, String key) {
@@ -58,10 +64,9 @@ public class Zip {
                 new File("./pom.xml"),
                 new File("./pom.zip")
         );
-        List<File> sources = new ArrayList<>();
-        Path root = Paths.get(".");
-        Search.search(root, p -> !p.toFile().getName().endsWith(getArgsValue(args, "e"))).
-                forEach(p -> sources.add(p.toFile()));
+        Path root = Paths.get(getArgsValue(args, "d"));
+        List<Path> sources = new ArrayList<>(Search.search(root, p -> !p.toFile().getName().
+                endsWith(getArgsValue(args, "e"))));
         zip.packFiles(sources, new File(getArgsValue(args, "o")));
     }
 }
