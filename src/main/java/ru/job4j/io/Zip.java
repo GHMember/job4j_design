@@ -33,7 +33,7 @@ public class Zip {
         }
     }
 
-    private static void validation(String[] args, ArgsName argsValue) {
+    private static void validation(ArgsName argsValue) {
         File file = new File(argsValue.get("d"));
         if (!file.exists()) {
             throw new IllegalArgumentException(String.format("Not exist %s", file.getAbsoluteFile()));
@@ -41,10 +41,10 @@ public class Zip {
         if (!file.isDirectory()) {
             throw new IllegalArgumentException(String.format("Not directory %s", file.getAbsoluteFile()));
         }
-        if (!args[1].matches(".\\S+")) {
+        if (!argsValue.get("e").matches(".\\S+")) {
             throw new IllegalArgumentException("Wrong file format");
         }
-        if (!args[2].matches("\\S+.zip")) {
+        if (!argsValue.get("o").matches("\\S+.zip")) {
             throw new IllegalArgumentException("Wrong archive format");
         }
     }
@@ -53,13 +53,13 @@ public class Zip {
         if (args.length != 3) {
             throw new IllegalArgumentException("Wrong number of arguments. Expected 3.");
         }
-        validation(args, ArgsName.of(args));
+        ArgsName argsValue = ArgsName.of(args);
+        validation(argsValue);
         Zip zip = new Zip();
         zip.packSingleFile(
                 new File("./pom.xml"),
                 new File("./pom.zip")
         );
-        ArgsName argsValue = ArgsName.of(args);
         Path root = Paths.get(argsValue.get("d"));
         List<Path> sources = new ArrayList<>(Search.search(root, p -> !p.toFile().getName().
                 endsWith(argsValue.get("e"))));
