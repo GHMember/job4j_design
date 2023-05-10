@@ -33,11 +33,7 @@ public class Zip {
         }
     }
 
-    private static void validation(String[] args) {
-        if (args.length != 3) {
-            throw new IllegalArgumentException("Wrong number of arguments. Expected 3.");
-        }
-        ArgsName argsValue = ArgsName.of(args);
+    private static void validation(String[] args, ArgsName argsValue) {
         File file = new File(argsValue.get("d"));
         if (!file.exists()) {
             throw new IllegalArgumentException(String.format("Not exist %s", file.getAbsoluteFile()));
@@ -54,7 +50,10 @@ public class Zip {
     }
 
     public static void main(String[] args) throws IOException {
-        validation(args);
+        if (args.length != 3) {
+            throw new IllegalArgumentException("Wrong number of arguments. Expected 3.");
+        }
+        validation(args, ArgsName.of(args));
         Zip zip = new Zip();
         zip.packSingleFile(
                 new File("./pom.xml"),
