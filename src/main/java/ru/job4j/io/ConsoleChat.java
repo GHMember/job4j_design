@@ -25,9 +25,10 @@ public class ConsoleChat {
         boolean showAnswer = true;
         String phrase = null;
         List<String> log = new ArrayList<>();
-        int randomIndex = new Random().nextInt(readPhrases().size() - 1);
-        String answer = readPhrases().get(randomIndex);
+        List<String> phrases = readPhrases();
         while (!OUT.equals(phrase)) {
+            int randomIndex = new Random().nextInt(phrases.size() - 1);
+            String answer = phrases.get(randomIndex);
             System.out.print("Input a phrase: ");
             phrase = in.next();
             log.add(phrase);
