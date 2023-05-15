@@ -1,2 +1,4 @@
-Из PrintStream в FileOutputStream
-Новая строка
+age;education
+20;Bachelor
+35;Undergraduate
+15;Schoolboy
