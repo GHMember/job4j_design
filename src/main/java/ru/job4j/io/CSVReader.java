@@ -1,45 +1,43 @@
 package ru.job4j.io;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.StringJoiner;
+import java.util.*;
 
 public class CSVReader {
     public static void handle(ArgsName argsName) throws Exception {
 
-        List<String[]> list = new ArrayList<>();
+        List<List<String>> list = new ArrayList<>();
         List<String> filterArr = List.of(argsName.get("filter").split(","));
         List<Integer> intList = new ArrayList<>();
         List<StringJoiner> joinerList = new ArrayList<>();
 
-        try (var scanner = new Scanner(new FileReader(argsName.get("path")))) {
+        try (var scanner = new Scanner(new FileReader(argsName.get("path")))
+                .useDelimiter(System.lineSeparator())) {
             while (scanner.hasNext()) {
-                String[] arr = scanner.next().split(argsName.get("delimiter"));
+                List<String> arr = List.of(scanner.next().split(argsName.get("delimiter")));
                 list.add(arr);
             }
         }
-        for (int i = 0; i < list.get(0).length; i++) {
-            if (filterArr.contains(list.get(0)[i])) {
-                intList.add(i);
+        List<String> title = list.get(0);
+        for (String s : filterArr) {
+            if (title.contains(s)) {
+                intList.add(title.indexOf(s));
             }
         }
-        for (String[] arr : list) {
+        for (List<String> ls : list) {
             StringJoiner joiner = new StringJoiner(argsName.get("delimiter"));
             for (int i : intList) {
-                joiner.add(arr[i]);
+                joiner.add(ls.get(i));
             }
             joinerList.add(joiner);
         }
-
         File file = new File(argsName.get("out"));
         try (FileWriter fv = new FileWriter(file)) {
             for (StringJoiner sj : joinerList) {
                 if (argsName.get("out").equals("stdout")) {
                     System.out.println(sj.toString());
                 } else {
-                    fv.write(sj.toString() + "\n");
+                    fv.write(sj.toString() + System.lineSeparator());
                 }
             }
         }
