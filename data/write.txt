@@ -1,4 +1,4 @@
-age;education
-20;Bachelor
-35;Undergraduate
-15;Schoolboy
+education;age
+Bachelor;20
+Undergraduate;25
+Secondary special;30
