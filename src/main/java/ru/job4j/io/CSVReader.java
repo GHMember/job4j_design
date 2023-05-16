@@ -34,7 +34,7 @@ public class CSVReader {
         File file = new File(argsName.get("out"));
         try (FileWriter fv = new FileWriter(file)) {
             for (StringJoiner sj : joinerList) {
-                if (argsName.get("out").equals("stdout")) {
+                if ("stdout".equals(argsName.get("out"))) {
                     System.out.println(sj.toString());
                 } else {
                     fv.write(sj.toString() + System.lineSeparator());
@@ -52,7 +52,7 @@ public class CSVReader {
             throw new IllegalArgumentException(String.format("Source isn't file %s", in.getAbsoluteFile()));
         }
         File out = new File(argsValue.get("out"));
-        if (!out.toString().equals("stdout") && !out.exists()) {
+        if (!"stdout".equals(out.toString()) && !out.exists()) {
             throw new IllegalArgumentException(String.format("Out file not exist %s", out.getAbsoluteFile()));
         }
         if (argsValue.get("delimiter").matches("\\w")) {
