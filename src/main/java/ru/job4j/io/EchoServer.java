@@ -18,9 +18,7 @@ public class EchoServer {
                         server.close();
                         break;
                     }
-                    else {
-                        out.write(clientAsk.getBytes());
-                    }
+                    out.write(clientAsk.getBytes());
                     out.flush();
                 }
             }
