@@ -14,7 +14,7 @@ public class EchoServer {
                              new InputStreamReader(socket.getInputStream()))) {
                     out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
                     String[] arr = in.readLine().split("=");
-                    String clientAsk = arr[1].substring(0, arr[1].indexOf(" ") + 1) + "\r\n\r\n";
+                    String clientAsk = arr[1].substring(0, arr[1].indexOf(" "));
                     if (clientAsk.contains("Exit")) {
                         server.close();
                     }
