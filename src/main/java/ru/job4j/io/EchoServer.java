@@ -27,8 +27,7 @@ public class EchoServer {
                     out.flush();
                 }
             }
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             LOG.error("Server isn't responding", e);
         }
     }
