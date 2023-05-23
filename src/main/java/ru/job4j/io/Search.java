@@ -11,8 +11,8 @@ import java.util.function.Predicate;
 public class Search {
     public static void main(String[] args) throws IOException {
         validation(args);
-        Path start = Paths.get(".");
-        search(start, p -> p.toFile().getName().endsWith(".js")).forEach(p -> System.out.println(p.toFile().getName()));
+        Path start = Paths.get(args[0]);
+        search(start, p -> p.toFile().getName().endsWith(args[1])).forEach(p -> System.out.println(p.toFile().getName()));
     }
 
     private static void validation(String[] args) {
