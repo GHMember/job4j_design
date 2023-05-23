@@ -1,13 +1,25 @@
 package ru.job4j.io.serialization;
 
+import javax.xml.bind.annotation.*;
 import java.util.Arrays;
 
+@XmlRootElement(name = "company")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Company {
-    private final boolean exist;
-    private final int employeesNumber;
-    private final String name;
-    private final Phone phone;
-    private final String[] economicActivities;
+    @XmlAttribute
+    private boolean exist;
+    @XmlAttribute
+    private int employeesNumber;
+    @XmlAttribute
+    private String name;
+    @XmlElement(name = "contact")
+    private Phone phone;
+    @XmlElementWrapper(name = "economicActivities")
+    @XmlElement(name = "economicActivity")
+    private String[] economicActivities;
+
+    public Company() {
+    }
 
     public Company(boolean exist, int employeesNumber, String name, Phone phone, String[] economicActivities) {
         this.exist = exist;
@@ -24,7 +36,7 @@ public class Company {
                 + ", employeeCount=" + employeesNumber
                 + ", name=" + name
                 + ", phone=" + phone
-                + ", statuses=" + Arrays.toString(economicActivities)
+                + ", economicActivities=" + Arrays.toString(economicActivities)
                 + '}';
     }
 }

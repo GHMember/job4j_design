@@ -1,7 +1,15 @@
 package ru.job4j.io.serialization;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "contact")
 public class Phone {
-    private final String phone;
+    @XmlAttribute
+    private String phone;
+
+    public Phone() {
+    }
 
     public Phone(String phone) {
         this.phone = phone;
@@ -9,7 +17,7 @@ public class Phone {
 
     @Override
     public String toString() {
-        return "Phone{"
+        return "Contact{"
                 + "phone='" + phone + '\''
                 + '}';
     }
