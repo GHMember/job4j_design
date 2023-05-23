@@ -29,6 +29,26 @@ public class Company {
         this.economicActivities = economicActivities;
     }
 
+    public int getEmployeesNumber() {
+        return employeesNumber;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Phone getPhone() {
+        return phone;
+    }
+
+    public String[] getEconomicActivities() {
+        return economicActivities;
+    }
+
+    public boolean isExist() {
+        return exist;
+    }
+
     @Override
     public String toString() {
         return "Company{"
