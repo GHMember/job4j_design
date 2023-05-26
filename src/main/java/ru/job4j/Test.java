@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 
 public class Test {
     public static void main(String[] args) throws FileNotFoundException {
+
+
         List<String> list = new ArrayList<>();
         try(var scanner = new Scanner(new BufferedReader(new FileReader("./data/cities.xml")))
                 .useDelimiter(System.lineSeparator())) {
@@ -64,7 +66,6 @@ public class Test {
                         System.out.printf("количество %s-этажных зданий - %d%n", s, 0);
                     }
                 }
-                System.out.println();
             }
         }
     }
