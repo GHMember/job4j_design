@@ -9,9 +9,8 @@ import java.util.stream.Collectors;
 public class Test {
     public static void main(String[] args) throws FileNotFoundException {
 
-
         List<String> list = new ArrayList<>();
-        try(var scanner = new Scanner(new BufferedReader(new FileReader("./data/cities.xml")))
+        try (var scanner = new Scanner(new BufferedReader(new FileReader("./data/cities.xml")))
                 .useDelimiter(System.lineSeparator())) {
             while (scanner.hasNext()) {
                 String str = scanner.next();
@@ -29,7 +28,7 @@ public class Test {
 //                            map.getKey(), map.getValue()));
 
             List<String> buildingInfo = new ArrayList<>();
-            for (String str : list){
+            for (String str : list) {
                 String[] substrs = str.split("\"");
                 StringBuilder sb = new StringBuilder();
                 for (int i = 0; i < substrs.length; i++) {
@@ -42,7 +41,7 @@ public class Test {
             Collections.sort(buildingInfo);
             Set<String> cities = new HashSet<>();
             for (String str : buildingInfo) {
-                String city = str.substring(0,str.length()-1);
+                String city = str.substring(0, str.length() - 1);
                 cities.add(city);
             }
             cities = cities.stream().sorted().collect(Collectors.toCollection(LinkedHashSet::new));
@@ -51,18 +50,18 @@ public class Test {
                 List<String> floors = new ArrayList<>();
                 for (String str : buildingInfo) {
                     if (str.contains(city)) {
-                        String floor = str.substring(str.length()-1);
+                        String floor = str.substring(str.length() - 1);
                         floors.add(floor);
                     }
                 }
                 List<String> floorList = List.of("1", "2", "3", "4", "5");
-                Map<Object, Long> countBuildings = floors.stream().collect(Collectors.groupingBy(c -> c , Collectors.counting()));
+                Map<Object, Long> countBuildings = floors.stream().collect(Collectors.groupingBy(c -> c,
+                        Collectors.counting()));
                 /* Выводим на печать города с количеством 1, 2, 3, 4 и 5 этажных зданий */
                 for (String s : floorList) {
                     if (countBuildings.containsKey(s)) {
                         System.out.printf("количество %s-этажных зданий - %d%n", s, countBuildings.get(s));
-                    }
-                    else {
+                    } else {
                         System.out.printf("количество %s-этажных зданий - %d%n", s, 0);
                     }
                 }
