@@ -25,10 +25,10 @@ insert into items(message, user_id, category_id, state_id) values('normal troubl
 insert into items(message, user_id, category_id, state_id) values('urgent trouble1', 2, 2, 1);
 insert into items(message, user_id, category_id, state_id) values('urgent trouble2', 3, 2, 2);
 
-insert into ataches(title, file_size, item_id) values('file1', 100, 1);
-insert into ataches(title, file_size, item_id) values('file2', 50, 1);
-insert into ataches(title, file_size, item_id) values('file3', 10, 2);
-insert into ataches(title, file_size, item_id) values('file4', 20, 3);
+insert into attaches(title, file_size, item_id) values('file1', 100, 1);
+insert into attaches(title, file_size, item_id) values('file2', 50, 1);
+insert into attaches(title, file_size, item_id) values('file3', 10, 2);
+insert into attaches(title, file_size, item_id) values('file4', 20, 3);
 
 insert into comments(comment, item_id) values('comment1', 1);
 insert into comments(comment, item_id) values('comment2', 1);
