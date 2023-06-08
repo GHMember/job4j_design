@@ -19,7 +19,7 @@ insert into categories(name) values('normal');
 insert into categories(name) values('urgent');
 
 insert into states(name) values('pending');
-insert into categories(name) values('done');
+insert into states(name) values('done');
 
 insert into items(message, user_id, category_id, state_id) values('normal trouble1', 2, 1, 1);
 insert into items(message, user_id, category_id, state_id) values('urgent trouble1', 2, 2, 1);
@@ -34,5 +34,3 @@ insert into comments(comment, item_id) values('comment1', 1);
 insert into comments(comment, item_id) values('comment2', 1);
 insert into comments(comment, item_id) values('comment3', 2);
 insert into comments(comment, item_id) values('comment4', 3);
-
-
