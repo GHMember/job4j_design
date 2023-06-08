@@ -32,7 +32,7 @@ create table states (
 
 create table items (
     id serial primary key,
-    message text
+    message text,
     user_id integer references users(id),
     category_id integer references categories(id),
     state_id integer references states(id)
