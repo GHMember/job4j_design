@@ -19,7 +19,7 @@ insert into employees(name, dep_id) values ('employee3', 2);
 insert into employees(name, dep_id) values ('employee4', 2);
 insert into employees(name) values ('employee5');
 
-select d.name from departments d left join employees e on d.id = e.dep_id where count(e.id) = null;
+select d.name from departments d left join employees e on d.id = e.dep_id where e.id is null;
 
 select d.id, d.name, e.id, e.name, e.dep_id from departments d left join employees e on d.id = e.dep_id;
 select d.id, d.name, e.id, e.name, e.dep_id from employees e right join departments d on e.dep_id = d.id;
