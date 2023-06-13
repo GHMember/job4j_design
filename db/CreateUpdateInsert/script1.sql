@@ -37,4 +37,4 @@ insert into teens(name, gender) values ('Мария', 'женский');
 insert into teens(name, gender) values ('Василий', 'мужской');
 insert into teens(name, gender) values ('Светлана', 'женский');
 
-select * from teens as t1 cross join teens as t2;
+select * from teens as t1 cross join teens as t2 where t1.gender = 'мужской' and t2.gender = 'женский';
