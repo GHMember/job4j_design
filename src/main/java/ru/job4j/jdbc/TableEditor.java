@@ -18,14 +18,11 @@ public class TableEditor implements AutoCloseable {
     }
 
     private void initConnection() throws ClassNotFoundException, SQLException, IOException {
-        try (InputStream in = TableEditor.class.getClassLoader().getResourceAsStream("app.properties")) {
-            properties.load(in);
             Class.forName(properties.getProperty("driver_class"));
             String url = properties.getProperty("url");
             String login = properties.getProperty("username");
             String password = properties.getProperty("password");
             connection = DriverManager.getConnection(url, login, password);
-        }
     }
 
     public void createTable(String tableName) {
@@ -111,7 +108,11 @@ public class TableEditor implements AutoCloseable {
     }
 
     public static void main(String[] args) throws Exception {
-        try (TableEditor tableEditor = new TableEditor(new Properties())) {
+        Properties properties = new Properties();
+        try (InputStream in = TableEditor.class.getClassLoader().getResourceAsStream("app.properties")) {
+            properties.load(in);
+        }
+        try (TableEditor tableEditor = new TableEditor(properties)) {
             tableEditor.createTable("my_test");
             System.out.println(tableEditor.getTableScheme("my_test"));
             tableEditor.dropColumn("my_test", "name");
