@@ -1,10 +1,6 @@
 package ru.job4j.kiss;
 
 import org.junit.jupiter.api.Test;
-<<<<<<< HEAD
-
-=======
->>>>>>> dbfce43 (Правки к заданию 2. Принципы Kiss, Dry и Yagni [#238813])
 import static org.assertj.core.api.Assertions.*;
 
 class FoolTest {
@@ -44,9 +40,4 @@ class FoolTest {
         assertThat(fool.getStartAt()).isNotEqualTo(3);
         assertThat(fool.getStartAt()).isEqualTo(0);
     }
-<<<<<<< HEAD
-
-
-=======
->>>>>>> dbfce43 (Правки к заданию 2. Принципы Kiss, Dry и Yagni [#238813])
 }
